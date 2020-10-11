@@ -14,9 +14,7 @@
       "options": {
         "cwd": "E:\\Software\\MinGW64\\bin"
       },
-      "problemMatcher": [
-        "$gcc"
-      ],
+      "problemMatcher": [],
       "group": {
         "kind": "build",
         "isDefault": true
