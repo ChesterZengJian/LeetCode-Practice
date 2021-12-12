@@ -1,3 +1,5 @@
+import models.ListNode;
+
 /*
  * @lc app=leetcode.cn id=2 lang=java
  *
