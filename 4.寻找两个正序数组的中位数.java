@@ -1,15 +1,41 @@
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Comparator;
 
-public class Main {
-    public static void main(String[] args) {
-        int[] nums1 = { 1 };
-        int[] nums2 = {};
-        System.out.println(findMedianSortedArrays(nums1, nums2));
-    }
+/*
+ * @lc app=leetcode.cn id=4 lang=java
+ *
+ * [4] 寻找两个正序数组的中位数
+ */
 
-    public static double findMedianSortedArrays(int[] nums1, int[] nums2) {
+// @lc code=start
+
+class Solution {
+    /**
+     * 暴力解法，O(m+n+(n+m)log(n+m)) 即 O((n+m))
+     */
+    // public double findMedianSortedArrays(int[] nums1, int[] nums2) {
+    // ArrayList<Integer> nums = new ArrayList<>(nums1.length + nums2.length);
+
+    // for (int i = 0; i < (nums1.length + nums2.length); i++) {
+    // if (i < nums1.length) {
+
+    // nums.add(nums1[i]);
+    // }
+    // if (i < nums2.length)
+    // nums.add(nums2[i]);
+    // }
+
+    // nums.sort(Comparator.naturalOrder());
+
+    // int middlePosition = nums.size() / 2;
+    // if (nums.size() % 2 == 0) {
+    // return (nums.get(middlePosition) + nums.get(middlePosition - 1)) / 2.00000;
+    // }
+
+    // return nums.get(middlePosition) * 1.00000;
+    // }
+
+    public double findMedianSortedArrays(int[] nums1, int[] nums2) {
         int length1 = nums1.length, length2 = nums2.length;
         int totalLength = length1 + length2;
         if (totalLength % 2 == 1) {
@@ -24,11 +50,10 @@ public class Main {
         }
     }
 
-    public static int getKthElement(int[] nums1, int[] nums2, int k) {
+    public int getKthElement(int[] nums1, int[] nums2, int k) {
 
         int length1 = nums1.length, length2 = nums2.length;
         int index1 = 0, index2 = 0;
-        int kthElement = 0;
 
         while (true) {
             // 边界情况
@@ -57,3 +82,4 @@ public class Main {
         }
     }
 }
+// @lc code=end
