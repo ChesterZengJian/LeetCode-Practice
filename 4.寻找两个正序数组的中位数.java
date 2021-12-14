@@ -63,6 +63,7 @@ class Solution {
          */
 
         int length1 = nums1.length, length2 = nums2.length;
+        // 去掉不可能为中位数后的数组1，2的开始位置
         int index1 = 0, index2 = 0;
 
         while (true) {
@@ -81,9 +82,11 @@ class Solution {
             int half = k / 2;
             int newIndex1 = Math.min(index1 + half, length1) - 1;
             int newIndex2 = Math.min(index2 + half, length2) - 1;
+            // 每个数组的前k个数的中间值
             int pivot1 = nums1[newIndex1], pivot2 = nums2[newIndex2];
             if (pivot1 <= pivot2) {
                 k -= (newIndex1 - index1 + 1);
+                // 数组1的k/2小于数组2的 k/2，那么数组1应该舍弃掉前 k/2 个数，所以索引从 newIndex1+1 位置开始
                 index1 = newIndex1 + 1;
             } else {
                 k -= (newIndex2 - index2 + 1);
