@@ -1,13 +1,12 @@
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
+/*
+ * @lc app=leetcode.cn id=5 lang=java
+ *
+ * [5] 最长回文子串
+ */
 
-public class Main {
-    public static void main(String[] args) {
-        System.out.println(longestPalindrome("abcba"));
-    }
-
-    public static String longestPalindrome(String s) {
+// @lc code=start
+class Solution {
+    public String longestPalindrome(String s) {
         if (s.length() < 2)
             return s;
 
@@ -45,3 +44,4 @@ public class Main {
         return s.substring(begin, begin + max);
     }
 }
+// @lc code=end
