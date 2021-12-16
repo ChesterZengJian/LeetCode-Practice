@@ -18,6 +18,8 @@ class Solution {
             dp[i][i] = true;
         }
 
+        // 转为数组后，比较单个字符更快，比直接 s.charAt() 快一倍
+        char[] charArray = s.toCharArray();
         for (int len = 2; len <= s.length(); len++) {
             for (int startPosition = 0; startPosition < s.length(); startPosition++) {
                 // 结束位置=开始位置+长度-1
@@ -27,7 +29,7 @@ class Solution {
                     break;
                 }
 
-                if (s.charAt(startPosition) == s.charAt(endPosition)) {
+                if (charArray[startPosition] == charArray[endPosition]) {
                     dp[startPosition][endPosition] = endPosition - startPosition < 3 ? true
                             : dp[startPosition + 1][endPosition - 1];
                 } else {
