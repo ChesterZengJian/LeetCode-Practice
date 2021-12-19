@@ -1,4 +1,5 @@
 import java.io.Console;
+import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
@@ -13,71 +14,32 @@ public class Main {
 
     public static void main(String[] args) {
         // System.out.println(Integer.parseUnsignedInt("91283472332", 0, 4, 10));
-        System.out.println(myAtoi("+-12"));
+        System.out.println(romanToInt("MCMXCIV"));
     }
 
-    public static int myAtoi(String s) {
-        char[] chars = s.toCharArray();
+    public static int romanToInt(String s) {
+        Map<Character, Integer> romanToIntMap = new HashMap<>() {
+            {
+                put('I', 1);
+                put('V', 5);
+                put('X', 10);
+                put('L', 50);
+                put('C', 100);
+                put('D', 500);
+                put('M', 1000);
+            }
+        };
 
-        for (int i = 0; i < chars.length; i++) {
-            setResult(chars[i]);
+        int ans = 0;
+        int n = s.length();
+        for (int i = 0; i < n; ++i) {
+            int value = romanToIntMap.get(s.charAt(i));
+            if (i < n - 1 && value < romanToIntMap.get(s.charAt(i + 1))) {
+                ans -= value;
+            } else {
+                ans += value;
+            }
         }
-
-        return (int) (sign * ans);
-    }
-
-    public enum StrConvertState {
-        Start, Signed, Num, End
-    }
-
-    private static Map<StrConvertState, StrConvertState[]> states = new HashMap<>() {
-        {
-            put(StrConvertState.Start, new StrConvertState[] {
-                    StrConvertState.Start, StrConvertState.Signed,
-                    StrConvertState.Num, StrConvertState.End });
-            put(StrConvertState.Signed, new StrConvertState[] {
-                    StrConvertState.Start, StrConvertState.End,
-                    StrConvertState.Num, StrConvertState.End });
-            put(StrConvertState.Num, new StrConvertState[] {
-                    StrConvertState.Start, StrConvertState.Signed,
-                    StrConvertState.Num, StrConvertState.End });
-            put(StrConvertState.End, new StrConvertState[] {
-                    StrConvertState.End, StrConvertState.End,
-                    StrConvertState.End, StrConvertState.End });
-        }
-    };
-
-    public static StrConvertState state = StrConvertState.Start;
-
-    public static long ans = 0;
-    public static int sign = 1;
-
-    public static void setResult(char c) {
-        state = states.get(state)[getCol(c)];
-
-        if (StrConvertState.Num == state) {
-            ans = ans * 10 + (c - '0');
-            ans = sign == 1
-                    ? Math.min(Integer.MAX_VALUE, ans) // 正数时如果 ans 大于 int 最大值取 int 最大值
-                    : Math.min(-(long) Integer.MIN_VALUE, ans); // 负数时，绝对值也不能超过 int 最小值的绝对值
-        } else if (StrConvertState.Signed == state) {
-            sign = c == '+' ? 1 : -1;
-        }
-    }
-
-    public static int getCol(char c) {
-        if (c == ' ') {
-            return 0;
-        }
-
-        if (c == '+' || c == '-') {
-            return 1;
-        }
-
-        if ('0' <= c && c <= '9') {
-            return 2;
-        }
-
-        return 3;
+        return ans;
     }
 }
