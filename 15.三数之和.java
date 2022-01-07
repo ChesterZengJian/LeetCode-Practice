@@ -1,27 +1,12 @@
-import java.io.Console;
-import java.lang.reflect.Array;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-import java.util.logging.LogManager;
+/*
+ * @lc app=leetcode.cn id=15 lang=java
+ *
+ * [15] 三数之和
+ */
 
-import javax.xml.stream.events.StartDocument;
-
-public class Main {
-
-    public static void main(String[] args) {
-        // System.out.println(Integer.parseUnsignedInt("91283472332", 0, 4,
-        // 10));jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-        System.out.println(threeSum(new int[] { -1, 0, 1, 2, -1, -4 }));
-        // System.out.println(threeSum(new int[] { 1, 2, -2, -1 }));
-    }
-
-    public static List<List<Integer>> threeSum(int[] nums) {
+// @lc code=start
+class Solution {
+    public List<List<Integer>> threeSum(int[] nums) {
         List<List<Integer>> res = new ArrayList<>();
         int len = nums.length;
         Arrays.sort(nums);
@@ -60,3 +45,4 @@ public class Main {
         return res;
     }
 }
+// @lc code=end
