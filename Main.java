@@ -22,27 +22,36 @@ public class Main {
         ListNode head = new ListNode(3);
         head.next = new ListNode(2);
         head.next.next = head;
-        System.out.println(hasCycle(head));
+        System.out.println(detectCycle(head).val);
         // System.out.println(threeSum(new int[] { 1, 2, -2, -1 }));
     }
 
-    public static boolean hasCycle(ListNode head) {
-        if (head == null) {
-            return false;
-        }
+    public static ListNode detectCycle(ListNode head) {
+        ListNode slow, fast;
+        slow = fast = head;
+        boolean hasCycle = false;
 
-        ListNode slow = head;
-        ListNode quick = head;
-
-        while (slow.next != null && quick.next.next != null) {
+        while (fast != null && fast.next != null && fast.next.next != null) {
             slow = slow.next;
-            quick = quick.next.next;
+            fast = fast.next.next;
 
-            if (slow == quick) {
-                return true;
+            if (fast == slow) {
+                hasCycle = true;
+                break;
             }
         }
 
-        return false;
+        if (!hasCycle) {
+            return null;
+        }
+
+        fast = head;
+
+        while (fast != slow) {
+            slow = slow.next;
+            fast = fast.next;
+        }
+
+        return slow;
     }
 }
