@@ -12,51 +12,37 @@ import java.util.logging.LogManager;
 
 import javax.xml.stream.events.StartDocument;
 
+import models.ListNode;
+
 public class Main {
 
     public static void main(String[] args) {
         // System.out.println(Integer.parseUnsignedInt("91283472332", 0, 4,
         // 10));jjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjjj
-        System.out.println(threeSum(new int[] { -1, 0, 1, 2, -1, -4 }));
+        ListNode head = new ListNode(3);
+        head.next = new ListNode(2);
+        head.next.next = head;
+        System.out.println(hasCycle(head));
         // System.out.println(threeSum(new int[] { 1, 2, -2, -1 }));
     }
 
-    public static List<List<Integer>> threeSum(int[] nums) {
-        List<List<Integer>> res = new ArrayList<>();
-        int len = nums.length;
-        Arrays.sort(nums);
+    public static boolean hasCycle(ListNode head) {
+        if (head == null) {
+            return false;
+        }
 
-        for (int i = 0; i < nums.length; i++) {
-            int leftPoint = i + 1, rightPoint = len - 1;
-            if (i > 0 && nums[i] == nums[i - 1]) {
-                continue;
-            }
+        ListNode slow = head;
+        ListNode quick = head;
 
-            while (leftPoint < rightPoint) {
-                if (leftPoint > i + 1 && nums[leftPoint] == nums[leftPoint - 1]) {
-                    leftPoint++;
-                    continue;
-                }
+        while (slow.next != null && quick.next.next != null) {
+            slow = slow.next;
+            quick = quick.next.next;
 
-                while (leftPoint < rightPoint && nums[leftPoint] + nums[rightPoint] > -nums[i]) {
-                    rightPoint--;
-                }
-
-                if (leftPoint == rightPoint)
-                    break;
-
-                // System.out.println(String.format("i=%d;left=%d;right=%d", nums[i], nums[leftPoint], nums[rightPoint]));
-                if (nums[i] + nums[leftPoint] + nums[rightPoint] == 0) {
-                    List<Integer> arr = new ArrayList<>();
-                    arr.add(nums[i]);
-                    arr.add(nums[leftPoint]);
-                    arr.add(nums[rightPoint]);
-                    res.add(arr);
-                }
-                leftPoint++;
+            if (slow == quick) {
+                return true;
             }
         }
 
-        return res;
+        return false;
     }
 }
