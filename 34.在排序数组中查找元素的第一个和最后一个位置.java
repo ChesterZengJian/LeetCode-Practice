@@ -1,36 +1,16 @@
-import java.io.Console;
-import java.lang.reflect.Array;
-import java.time.Period;
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Comparator;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.Stack;
-import java.util.logging.LogManager;
+/*
+ * @lc app=leetcode.cn id=34 lang=java
+ *
+ * [34] 在排序数组中查找元素的第一个和最后一个位置
+ */
 
-import javax.sql.rowset.serial.SerialArray;
-import javax.swing.plaf.synth.SynthButtonUI;
-import javax.xml.stream.events.StartDocument;
-
-import models.ListNode;
-
-public class Main {
-
-    public static void main(String[] args) {
-        int[] nums = new int[] { 6 };
-        // System.out.println(searchLeftRange(nums, 8));
-        // System.out.println(searchrightRange(nums, 8));
-        int[] res = searchRange(nums, 6);
-        System.out.println("[" + res[0] + "," + res[1] + "]");
-    }
-
-    public static int[] searchRange(int[] nums, int target) {
+// @lc code=start
+class Solution {
+    public int[] searchRange(int[] nums, int target) {
         return new int[] { searchLeftRange(nums, target), searchrightRange(nums, target) };
     }
 
-    public static int searchLeftRange(int[] nums, int target) {
+    public int searchLeftRange(int[] nums, int target) {
         if (nums.length == 0)
             return -1;
 
@@ -55,7 +35,7 @@ public class Main {
         return left;
     }
 
-    public static int searchrightRange(int[] nums, int target) {
+    public int searchrightRange(int[] nums, int target) {
         if (nums.length == 0)
             return -1;
 
@@ -80,3 +60,4 @@ public class Main {
         return right;
     }
 }
+// @lc code=end
