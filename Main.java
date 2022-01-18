@@ -13,72 +13,32 @@ import java.util.logging.LogManager;
 
 import javax.management.ValueExp;
 import javax.sql.rowset.serial.SerialArray;
+import javax.swing.RootPaneContainer;
 import javax.swing.plaf.synth.SynthButtonUI;
 import javax.xml.stream.events.StartDocument;
 
+import models.BinarySearchTree;
+import models.BinarySearchTreeNode;
 import models.ListNode;
 
 public class Main {
 
     public static void main(String[] args) {
-        String s1 = "abab", s2 = "ab";
-        var result = findAnagrams(s1, s2);
-        for (Integer integer : result) {
-            System.out.print(integer + "\t");
-        }
-    }
+        BinarySearchTreeNode root = new BinarySearchTreeNode(10);
+        root.setLeft(new BinarySearchTreeNode(5));
+        root.setRight(new BinarySearchTreeNode(15));
+        root.getRight().setLeft(new BinarySearchTreeNode(6));
+        root.getRight().setRight(new BinarySearchTreeNode(20));
+        BinarySearchTree bst = new BinarySearchTree(root);
+        bst.insertIntoBST(21);
+        bst.insertIntoBST(25);
 
-    public static List<Integer> findAnagrams(String s, String p) {
-        int l = 0, r = 0, valid = 0;
-        Map<Character, AtomicInteger> need = new HashMap<>(),
-                window = new HashMap<>();
-        List<Integer> result = new ArrayList();
-        char[] strChars = s.toCharArray();
-        char[] subStrChars = p.toCharArray();
+        int treeHeight = bst.getHeight();
 
-        for (int i = 0; i < subStrChars.length; i++) {
-            incrementMap(need, subStrChars[i]);
-        }
-
-        while (r < strChars.length) {
-            char rightChar = strChars[r];
-            r++;
-
-            if (need.containsKey(rightChar)) {
-                incrementMap(window, rightChar);
-
-                if (window.get(rightChar).intValue() == need.get(rightChar).intValue()) {
-                    valid++;
-                }
-            }
-
-            while (r - l >= subStrChars.length) {
-                if (valid == need.size()) {
-                    result.add(l);
-                }
-
-                char leftChar = strChars[l];
-                l++;
-
-                if (need.containsKey(leftChar)) {
-                    if (window.get(leftChar).intValue() == need.get(leftChar).intValue()) {
-                        valid--;
-                    }
-
-                    window.get(leftChar).decrementAndGet();
-                }
-            }
-        }
-
-        return result;
-    }
-
-    private static void incrementMap(Map<Character, AtomicInteger> map, char updatedChar) {
-        if (!map.containsKey(updatedChar)) {
-            map.put(updatedChar, new AtomicInteger());
-            return;
-        }
-
-        map.get(updatedChar).incrementAndGet();
+        System.out.println(String.format("Tree height=%d; Total height=%d; Total weight=%d", treeHeight,
+                treeHeight * 2 - 1, (2 << (treeHeight - 1)) * 3 + 1));
+        System.out.println(bst.toString());
+        System.out.println(bst.IsValidBST());
+        System.out.println(bst.container(6));
     }
 }
