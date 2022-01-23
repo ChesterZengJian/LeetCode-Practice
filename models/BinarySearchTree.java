@@ -1,5 +1,8 @@
 package models;
 
+import java.util.ArrayList;
+import java.util.LinkedList;
+
 public class BinarySearchTree {
     private BinarySearchTreeNode root;
 
@@ -121,6 +124,67 @@ public class BinarySearchTree {
         }
 
         return container(root.left, target);
+    }
+
+    public String serialize() {
+        return serialize(root);
+    }
+
+    // Encodes a tree to a single string.
+    public static String serialize(BinarySearchTreeNode root) {
+        if (root == null) {
+            return "";
+        }
+
+        ArrayList<String> data = new ArrayList<>();
+        serialize(root, data);
+
+        return String.join(",", data);
+    }
+
+    public static void serialize(BinarySearchTreeNode root, ArrayList<String> data) {
+        if (root == null) {
+            data.add(null);
+            return;
+        }
+
+        data.add(Integer.toString(root.val));
+
+        serialize(root.left, data);
+        serialize(root.right, data);
+    }
+
+    // Decodes your encoded data to tree.
+    public static BinarySearchTreeNode deserialize(String data) {
+        if (data.isEmpty()) {
+            System.out.println("null");
+            return null;
+        }
+
+        LinkedList<String> nodes = new LinkedList<>();
+        String[] strs = data.split(",");
+
+        for (int i = 0; i < strs.length; i++) {
+            System.out.println("linked add " + strs[i]);
+            nodes.addLast(strs[i]);
+        }
+
+        return deserialize(nodes);
+    }
+
+    public static BinarySearchTreeNode deserialize(LinkedList<String> data) {
+        if (data.isEmpty())
+            return null;
+
+        String firstData = data.removeFirst();
+        System.out.println("First data:" + firstData);
+        if (firstData.equals("null"))
+            return null;
+
+        BinarySearchTreeNode root = new BinarySearchTreeNode(Integer.parseInt(firstData));
+        root.left = deserialize(data);
+        root.right = deserialize(data);
+        return root;
     }
 
     @Override

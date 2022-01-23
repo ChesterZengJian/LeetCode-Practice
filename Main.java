@@ -24,21 +24,34 @@ import models.ListNode;
 public class Main {
 
     public static void main(String[] args) {
-        BinarySearchTreeNode root = new BinarySearchTreeNode(10);
-        root.setLeft(new BinarySearchTreeNode(5));
-        root.setRight(new BinarySearchTreeNode(15));
-        root.getRight().setLeft(new BinarySearchTreeNode(6));
-        root.getRight().setRight(new BinarySearchTreeNode(20));
+        BinarySearchTreeNode root = new BinarySearchTreeNode(1);
+        root.setLeft(new BinarySearchTreeNode(2));
+        root.setRight(new BinarySearchTreeNode(3));
+        root.getRight().setLeft(new BinarySearchTreeNode(4));
+        root.getRight().setRight(new BinarySearchTreeNode(5));
         BinarySearchTree bst = new BinarySearchTree(root);
-        bst.insertIntoBST(21);
-        bst.insertIntoBST(25);
+        // bst.insertIntoBST(21);
+        // bst.insertIntoBST(25);
 
-        int treeHeight = bst.getHeight();
+        ArrayList<String> arr = new ArrayList<>();
+        arr.add(null);
+        arr.add("1");
+        // String str = String.join(";", arr);
+        // System.out.println(str);
+        String serializeStr = bst.serialize();
+        System.out.println(serializeStr);
+        BinarySearchTreeNode treeNode = BinarySearchTree.deserialize("");
+        BinarySearchTree desBst = new BinarySearchTree(treeNode);
+        System.out.println(desBst.toString());
 
-        System.out.println(String.format("Tree height=%d; Total height=%d; Total weight=%d", treeHeight,
-                treeHeight * 2 - 1, (2 << (treeHeight - 1)) * 3 + 1));
-        System.out.println(bst.toString());
-        System.out.println(bst.IsValidBST());
-        System.out.println(bst.container(6));
+        // int treeHeight = bst.getHeight();
+
+        // System.out.println(String.format("Tree height=%d; Total height=%d; Total
+        // weight=%d", treeHeight,
+        // treeHeight * 2 - 1, (2 << (treeHeight - 1)) * 3 + 1));
+        // System.out.println(bst.toString());
+        // System.out.println(bst.IsValidBST());
+        // System.out.println(bst.container(6));
     }
+
 }
