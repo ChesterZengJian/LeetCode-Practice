@@ -187,6 +187,28 @@ public class BinarySearchTree {
         return root;
     }
 
+    public BinarySearchTreeNode lowestCommonAncestor(BinarySearchTreeNode p, BinarySearchTreeNode q) {
+        return lowestCommonAncestor(root, p, q);
+    }
+
+    public static BinarySearchTreeNode lowestCommonAncestor(BinarySearchTreeNode root, BinarySearchTreeNode p,
+            BinarySearchTreeNode q) {
+        if (root == null)
+            return null;
+        if (root.val == p.val || root.val == q.val)
+            return root;
+
+        BinarySearchTreeNode left = lowestCommonAncestor(root.left, p, q);
+        BinarySearchTreeNode right = lowestCommonAncestor(root.right, p, q);
+
+        if (left != null && right != null)
+            return root;
+        if (left == null && right == null)
+            return null;
+
+        return left == null ? right : left;
+    }
+
     @Override
     public String toString() {
         return toString(root);
