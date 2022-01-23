@@ -11,6 +11,7 @@ import java.util.Stack;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.logging.LogManager;
 
+import javax.imageio.ImageReadParam;
 import javax.management.ValueExp;
 import javax.sql.rowset.serial.SerialArray;
 import javax.swing.RootPaneContainer;
@@ -57,4 +58,29 @@ public class Main {
         // System.out.println(bst.container(6));
     }
 
+    public static BinarySearchTreeNode lowestCommonAncestor(BinarySearchTreeNode root, BinarySearchTreeNode p,
+            BinarySearchTreeNode q) {
+        if (root == null)
+            return null;
+        if (root.val == p.val || root.val == q.val)
+            return root;
+
+        BinarySearchTreeNode left = null, right = null;
+        if (p.val < root.val && q.val < root.val) {
+            left = lowestCommonAncestor(root.left, p, q);
+        } else if (p.val > root.val && q.val > root.val) {
+            right = lowestCommonAncestor(root.right, p, q);
+        } else {
+            left = lowestCommonAncestor(root.left, p, q);
+            right = lowestCommonAncestor(root.right, p, q);
+        }
+
+        if (left != null && right != null)
+            return root;
+
+        if (left == null || right == null)
+            return root;
+
+        return left == null ? right : left;
+    }
 }
