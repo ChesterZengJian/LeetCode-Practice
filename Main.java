@@ -1,9 +1,11 @@
 import java.io.Console;
+import java.lang.Thread.State;
 import java.lang.reflect.Array;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.Dictionary;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -25,62 +27,36 @@ import models.ListNode;
 public class Main {
 
     public static void main(String[] args) {
-        BinarySearchTreeNode root = new BinarySearchTreeNode(3);
-        root.setLeft(new BinarySearchTreeNode(5));
-        root.setRight(new BinarySearchTreeNode(1));
-        root.getRight().setLeft(new BinarySearchTreeNode(0));
-        root.getRight().setRight(new BinarySearchTreeNode(8));
-        BinarySearchTree bst = new BinarySearchTree(root);
-        // bst.insertIntoBST(21);
-        // bst.insertIntoBST(25);
+        int[] nums1 = new int[] { 4, 1, 2 };
+        int[] nums2 = new int[] { 1, 3, 4, 2 };
+        int[] result = nextGreaterElement(nums1, nums2);
 
-        // ArrayList<String> arr = new ArrayList<>();
-        // arr.add(null);
-        // arr.add("1");
-        // String str = String.join(";", arr);
-        // System.out.println(str);
-        // String serializeStr = bst.serialize();
-        // System.out.println(serializeStr);
-        // BinarySearchTreeNode treeNode = BinarySearchTree.deserialize("");
-        // BinarySearchTree desBst = new BinarySearchTree(treeNode);
-        // System.out.println(desBst.toString());
-        BinarySearchTreeNode lcaNode = bst.lowestCommonAncestor(new BinarySearchTreeNode(5),
-                new BinarySearchTreeNode(1));
-        System.out.println(lcaNode.val);
-
-        // int treeHeight = bst.getHeight();
-
-        // System.out.println(String.format("Tree height=%d; Total height=%d; Total
-        // weight=%d", treeHeight,
-        // treeHeight * 2 - 1, (2 << (treeHeight - 1)) * 3 + 1));
-        // System.out.println(bst.toString());
-        // System.out.println(bst.IsValidBST());
-        // System.out.println(bst.container(6));
+        for (int i = 0; i < result.length; i++) {
+            System.out.println(result[i]);
+        }
     }
 
-    public static BinarySearchTreeNode lowestCommonAncestor(BinarySearchTreeNode root, BinarySearchTreeNode p,
-            BinarySearchTreeNode q) {
-        if (root == null)
-            return null;
-        if (root.val == p.val || root.val == q.val)
-            return root;
+    public static int[] nextGreaterElement(int[] nums1, int[] nums2) {
+        Stack<Integer> stack = new Stack<>();
+        Map<Integer, Integer> map = new HashMap<>(nums2.length);
+        int[] nums2NextGreaterElements = new int[nums2.length];
+        int[] result = new int[nums1.length];
 
-        BinarySearchTreeNode left = null, right = null;
-        if (p.val < root.val && q.val < root.val) {
-            left = lowestCommonAncestor(root.left, p, q);
-        } else if (p.val > root.val && q.val > root.val) {
-            right = lowestCommonAncestor(root.right, p, q);
-        } else {
-            left = lowestCommonAncestor(root.left, p, q);
-            right = lowestCommonAncestor(root.right, p, q);
+        for (int i = nums2.length - 1; i >= 0; i--) {
+            map.put(nums2[i], i);
+            while (!stack.empty() && stack.peek() <= nums2[i]) {
+                stack.pop();
+            }
+
+            nums2NextGreaterElements[i] = stack.empty() ? -1 : stack.peek();
+            stack.push(nums2[i]);
         }
 
-        if (left != null && right != null)
-            return root;
+        for (int i = 0; i < nums1.length; i++) {
+            int numIds = map.get(nums1[i]);
+            result[i] = nums2NextGreaterElements[numIds];
+        }
 
-        if (left == null || right == null)
-            return root;
-
-        return left == null ? right : left;
+        return result;
     }
 }
