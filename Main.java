@@ -23,31 +23,49 @@ import javax.xml.stream.events.StartDocument;
 import models.BinarySearchTree;
 import models.BinarySearchTreeNode;
 import models.ListNode;
+import models.MonotonicQueue;
 
 public class Main {
 
     public static void main(String[] args) {
-        int[] nums1 = new int[] { 1, 2, 1 };
-        int[] nums2 = new int[] { 1, 3, 4, 2 };
-        int[] result = nextGreaterElements(nums1);
+        int[] nums = new int[] { -7,-8,7,5,7,1,6,0 };
+        int k = 4;
+        int[] result = maxSlidingWindow(nums, k);
 
         for (int i = 0; i < result.length; i++) {
             System.out.println(result[i]);
         }
+
+        // MonotonicQueue q = new MonotonicQueue();
+
+        // for (int i = 0; i < 3; i++) {
+        // q.push(nums[i]);
+        // }
+
+        // q.getMax();
+        // q.print();
     }
 
-    public static int[] nextGreaterElements(int[] nums) {
-        Stack<Integer> stack = new Stack<>();
-        int[] result = new int[nums.length];
-        int len = nums.length;
+    public static int[] maxSlidingWindow(int[] nums, int k) {
+        MonotonicQueue window = new MonotonicQueue();
+        List<Integer> tmpResult = new ArrayList<>();
 
-        for (int i = len * 2 - 1; i >= 0; i--) {
-            while (!stack.empty() && stack.peek() <= nums[i % len]) {
-                stack.pop();
+        for (int i = 0; i < nums.length; i++) {
+            if (i < k - 1) {
+                window.push(nums[i]);
+                continue;
             }
 
-            result[i % len] = stack.empty() ? -1 : stack.peek();
-            stack.push(nums[i % len]);
+            window.push(nums[i]);
+            tmpResult.add(window.getMax());
+            // System.out.println(String.format("current max: %d", window.getMax()));
+            window.pop(nums[i - k + 1]);
+        }
+
+        int[] result = new int[tmpResult.size()];
+
+        for (int i = 0; i < result.length; i++) {
+            result[i] = tmpResult.get(i);
         }
 
         return result;
