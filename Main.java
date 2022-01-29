@@ -2,6 +2,7 @@ import java.io.Console;
 import java.lang.Thread.State;
 import java.lang.reflect.Array;
 import java.security.DrbgParameters.Reseed;
+import java.security.KeyStore.TrustedCertificateEntry;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -32,15 +33,37 @@ public class Main {
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
         head.next.next = new ListNode(2);
-        head.next.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(5);
         System.out.println(isPalindrome(head));
+
+        // ListNode newHead = reverse(head);
+        // System.out.println(newHead.val);
     }
 
-    private static ListNode left;
+    // private static ListNode left;
 
     public static boolean isPalindrome(ListNode head) {
-        left = head;
-        return travser(head);
+        ListNode slow = head, fast = head;
+
+        while (fast != null && fast.next != null) {
+            slow = slow.next;
+            fast = fast.next.next;
+        }
+
+        if (fast != null) {
+            slow = slow.next;
+        }
+
+        ListNode left = head, right = reverse(slow);
+
+        while (right != null) {
+            if (left.val != right.val)
+                return false;
+            left = left.next;
+            right = right.next;
+        }
+
+        return true;
     }
 
     public static boolean travser(ListNode right) {
@@ -51,5 +74,18 @@ public class Main {
         res = res && right.val == left.val;
         left = left.next;
         return res;
+    }
+
+    public static ListNode reverse(ListNode head) {
+        ListNode pre = null, cur = head;
+
+        while (cur != null) {
+            ListNode next = cur.next;
+            cur.next = pre;
+            pre = cur;
+            cur = next;
+        }
+
+        return pre;
     }
 }
