@@ -1,6 +1,7 @@
 import java.io.Console;
 import java.lang.Thread.State;
 import java.lang.reflect.Array;
+import java.security.DrbgParameters.Reseed;
 import java.time.Period;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -28,35 +29,27 @@ import models.MonotonicQueue;
 public class Main {
 
     public static void main(String[] args) {
-        String str = "A man, a plan, a canal: Panama";
-        // String str = "race a car";
-        // String str = "aba";
-        System.out.println(isPalindrome(str));
+        ListNode head = new ListNode(1);
+        head.next = new ListNode(2);
+        head.next.next = new ListNode(2);
+        head.next.next.next = new ListNode(2);
+        System.out.println(isPalindrome(head));
     }
 
-    public static boolean isPalindrome(String s) {
-        int l = 0, r = s.length() - 1;
-        s = s.toLowerCase();
+    private static ListNode left;
 
-        while (l < r) {
-            if (('z' < s.charAt(l) || s.charAt(l) < 'a') && ('9' < s.charAt(l) || s.charAt(l) < '0')) {
-                l++;
-                continue;
-            }
+    public static boolean isPalindrome(ListNode head) {
+        left = head;
+        return travser(head);
+    }
 
-            if (('z' < s.charAt(r) || s.charAt(r) < 'a') && ('9' < s.charAt(r) || s.charAt(r) < '0')) {
-                r--;
-                continue;
-            }
+    public static boolean travser(ListNode right) {
+        if (right == null)
+            return true;
 
-            if (s.charAt(l) != s.charAt(r)) {
-                return false;
-            }
-
-            l++;
-            r--;
-        }
-
-        return true;
+        boolean res = travser(right.next);
+        res = res && right.val == left.val;
+        left = left.next;
+        return res;
     }
 }
