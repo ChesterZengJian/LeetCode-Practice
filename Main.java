@@ -28,46 +28,35 @@ import models.MonotonicQueue;
 public class Main {
 
     public static void main(String[] args) {
-        int[] nums = new int[] { -7,-8,7,5,7,1,6,0 };
-        int k = 4;
-        int[] result = maxSlidingWindow(nums, k);
-
-        for (int i = 0; i < result.length; i++) {
-            System.out.println(result[i]);
-        }
-
-        // MonotonicQueue q = new MonotonicQueue();
-
-        // for (int i = 0; i < 3; i++) {
-        // q.push(nums[i]);
-        // }
-
-        // q.getMax();
-        // q.print();
+        String str = "A man, a plan, a canal: Panama";
+        // String str = "race a car";
+        // String str = "aba";
+        System.out.println(isPalindrome(str));
     }
 
-    public static int[] maxSlidingWindow(int[] nums, int k) {
-        MonotonicQueue window = new MonotonicQueue();
-        List<Integer> tmpResult = new ArrayList<>();
+    public static boolean isPalindrome(String s) {
+        int l = 0, r = s.length() - 1;
+        s = s.toLowerCase();
 
-        for (int i = 0; i < nums.length; i++) {
-            if (i < k - 1) {
-                window.push(nums[i]);
+        while (l < r) {
+            if (('z' < s.charAt(l) || s.charAt(l) < 'a') && ('9' < s.charAt(l) || s.charAt(l) < '0')) {
+                l++;
                 continue;
             }
 
-            window.push(nums[i]);
-            tmpResult.add(window.getMax());
-            // System.out.println(String.format("current max: %d", window.getMax()));
-            window.pop(nums[i - k + 1]);
+            if (('z' < s.charAt(r) || s.charAt(r) < 'a') && ('9' < s.charAt(r) || s.charAt(r) < '0')) {
+                r--;
+                continue;
+            }
+
+            if (s.charAt(l) != s.charAt(r)) {
+                return false;
+            }
+
+            l++;
+            r--;
         }
 
-        int[] result = new int[tmpResult.size()];
-
-        for (int i = 0; i < result.length; i++) {
-            result[i] = tmpResult.get(i);
-        }
-
-        return result;
+        return true;
     }
 }
