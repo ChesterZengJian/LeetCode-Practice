@@ -34,49 +34,24 @@ public class Main {
         head.next = new ListNode(2);
         head.next.next = new ListNode(2);
         head.next.next.next = new ListNode(5);
-        System.out.println(isPalindrome(head));
+        print(head);
 
-        // ListNode newHead = reverse(head);
-        // System.out.println(newHead.val);
+        ListNode newHead = reverseList(head);
+        System.out.println("after revers:");
+        print(newHead);
     }
 
-    // private static ListNode left;
+    // public static ListNode reverseList(ListNode head) {
+    // if (head == null || head.next == null)
+    // return head;
 
-    public static boolean isPalindrome(ListNode head) {
-        ListNode slow = head, fast = head;
+    // ListNode last = reverseList(head.next);
+    // head.next.next = head;
+    // head.next = null;
+    // return last;
+    // }
 
-        while (fast != null && fast.next != null) {
-            slow = slow.next;
-            fast = fast.next.next;
-        }
-
-        if (fast != null) {
-            slow = slow.next;
-        }
-
-        ListNode left = head, right = reverse(slow);
-
-        while (right != null) {
-            if (left.val != right.val)
-                return false;
-            left = left.next;
-            right = right.next;
-        }
-
-        return true;
-    }
-
-    public static boolean travser(ListNode right) {
-        if (right == null)
-            return true;
-
-        boolean res = travser(right.next);
-        res = res && right.val == left.val;
-        left = left.next;
-        return res;
-    }
-
-    public static ListNode reverse(ListNode head) {
+    public static ListNode reverseList(ListNode head) {
         ListNode pre = null, cur = head;
 
         while (cur != null) {
@@ -87,5 +62,19 @@ public class Main {
         }
 
         return pre;
+    }
+
+    public static void print(ListNode head) {
+        StringBuffer str = new StringBuffer();
+        while (head != null) {
+            str.append(head.val);
+
+            if (head.next != null) {
+                str.append(",");
+            }
+
+            head = head.next;
+        }
+        System.out.println(str.toString());
     }
 }
