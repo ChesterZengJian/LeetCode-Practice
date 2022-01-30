@@ -17,6 +17,7 @@ import java.util.logging.LogManager;
 
 import javax.imageio.ImageReadParam;
 import javax.management.ValueExp;
+import javax.sound.sampled.ReverbType;
 import javax.sql.rowset.serial.SerialArray;
 import javax.swing.RootPaneContainer;
 import javax.swing.plaf.synth.SynthButtonUI;
@@ -34,20 +35,39 @@ public class Main {
         head.next = new ListNode(2);
         head.next.next = new ListNode(3);
         head.next.next.next = new ListNode(4);
+        head.next.next.next.next = new ListNode(5);
         print(head);
 
-        ListNode newHead = reverseBetween(head, 1, 3);
+        ListNode newHead = reverseKGroup(head, 3);
         System.out.println("after revers:");
         print(newHead);
     }
 
-    public static ListNode reverseBetween(ListNode head, int left, int right) {
+    public static ListNode reverseKGroup(ListNode head, int k) {
+        int left = 1, right = 1;
+        ListNode cur = head, next = head;
+
+        while (cur != null) {
+            next = cur.next;
+
+            if (right % k == 0) {
+                head = reversBetween(head, left, right);
+                left = right + 1;
+            }
+
+            right++;
+            cur = next;
+        }
+
+        return head;
+    }
+
+    public static ListNode reversBetween(ListNode head, int left, int right) {
         if (left == 1) {
             return reversePreElement(head, right);
         }
 
-        ListNode last = reverseBetween(head.next, left - 1, right - 1);
-        head.next = last;
+        head.next = reversBetween(head.next, left - 1, right - 1);
         return head;
     }
 
