@@ -32,36 +32,34 @@ public class Main {
     public static void main(String[] args) {
         ListNode head = new ListNode(1);
         head.next = new ListNode(2);
-        head.next.next = new ListNode(2);
-        head.next.next.next = new ListNode(5);
+        head.next.next = new ListNode(3);
+        head.next.next.next = new ListNode(4);
         print(head);
 
-        ListNode newHead = reverseList(head);
+        ListNode newHead = reverseBetween(head, 1, 3);
         System.out.println("after revers:");
         print(newHead);
     }
 
-    // public static ListNode reverseList(ListNode head) {
-    // if (head == null || head.next == null)
-    // return head;
-
-    // ListNode last = reverseList(head.next);
-    // head.next.next = head;
-    // head.next = null;
-    // return last;
-    // }
-
-    public static ListNode reverseList(ListNode head) {
-        ListNode pre = null, cur = head;
-
-        while (cur != null) {
-            ListNode next = cur.next;
-            cur.next = pre;
-            pre = cur;
-            cur = next;
+    public static ListNode reverseBetween(ListNode head, int left, int right) {
+        if (left == 1) {
+            return reversePreElement(head, right);
         }
 
-        return pre;
+        ListNode last = reverseBetween(head.next, left - 1, right - 1);
+        head.next = last;
+        return head;
+    }
+
+    public static ListNode reversePreElement(ListNode head, int n) {
+        if (n == 1)
+            return head;
+
+        ListNode last = reversePreElement(head.next, n - 1);
+        ListNode next = head.next.next;
+        head.next.next = head;
+        head.next = next;
+        return last;
     }
 
     public static void print(ListNode head) {
