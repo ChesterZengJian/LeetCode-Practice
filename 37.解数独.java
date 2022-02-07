@@ -1,35 +1,12 @@
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
+/*
+ * @lc app=leetcode.cn id=37 lang=java
+ *
+ * [37] 解数独
+ */
 
-public class Main {
-
-    public static void main(String[] args) {
-        char[][] board = new char[][] {
-                { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
-                { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
-                { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
-                { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
-                { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
-                { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
-                { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
-                { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
-                { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
-        };
-        solveSudoku(board);
-
-        for (char[] cs : board) {
-            for (char c : cs) {
-                System.out.print(c + " | ");
-            }
-            System.out.println();
-        }
-    }
-
-    public static void solveSudoku(char[][] board) {
+// @lc code=start
+class Solution {
+    public void solveSudoku(char[][] board) {
         backTrack(board, 0, 0);
     }
 
@@ -76,17 +53,12 @@ public class Main {
             int rowIdxBoard = (row / 3) * 3 + i / 3;
             int colIdxBoard = (col / 3) * 3 + i % 3;
 
-            // System.out.println(String.format("rowIdxBoard=%s; colIdxBoard=%s",
-            // rowIdxBoard, colIdxBoard));
-
             if (rowIdxBoard != row && colIdxBoard != col && c == board[rowIdxBoard][colIdxBoard]) {
                 return false;
             }
         }
 
-        // System.out.println();
-
         return true;
     }
-
 }
+// @lc code=end
