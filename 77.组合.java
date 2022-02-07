@@ -1,27 +1,16 @@
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 
-import models.LRUCache;
+/*
+ * @lc app=leetcode.cn id=77 lang=java
+ *
+ * [77] 组合
+ */
 
-public class Main {
-
-    public static void main(String[] args) {
-        int[] nums = new int[] { 1, 2, 3 };
-        List<List<Integer>> result = combine(4, 2);
-
-        for (List<Integer> list : result) {
-            for (Integer list2 : list) {
-                System.out.print(list2);
-            }
-            System.out.println();
-        }
-    }
-
-    public static List<List<Integer>> combine(int n, int k) {
+// @lc code=start
+class Solution {
+    public List<List<Integer>> combine(int n, int k) {
         List<List<Integer>> result = new ArrayList<>();
         LinkedList<Integer> track = new LinkedList<>();
 
@@ -32,7 +21,7 @@ public class Main {
         return result;
     }
 
-    private static void backTrack(int startIdx, int n, int k, LinkedList<Integer> track,
+    private void backTrack(int startIdx, int n, int k, LinkedList<Integer> track,
             List<List<Integer>> result) {
         if (k == track.size()) {
             result.add(new ArrayList<>(track));
@@ -45,3 +34,4 @@ public class Main {
         }
     }
 }
+// @lc code=end
