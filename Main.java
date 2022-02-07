@@ -5,8 +5,6 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Map.Entry;
 
-import models.LRUCache;
-
 public class Main {
 
     public static void main(String[] args) {
@@ -38,7 +36,7 @@ public class Main {
             return;
         }
 
-        for (int i = 0; i <= nums.length; i++) {
+        for (int i = 0; i < nums.length; i++) {
             if (track.contains(nums[i]))
                 continue;
 
