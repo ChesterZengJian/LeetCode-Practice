@@ -8,41 +8,62 @@ import java.util.Map.Entry;
 public class Main {
 
     public static void main(String[] args) {
-        int[] nums = new int[] { 1, 2, 3 };
-        List<List<Integer>> result = permute(nums);
+        char[][] board = new char[][] {
+                { '5', '3', '.', '.', '7', '.', '.', '.', '.' },
+                { '6', '.', '.', '1', '9', '5', '.', '.', '.' },
+                { '.', '9', '8', '.', '.', '.', '.', '6', '.' },
+                { '8', '.', '.', '.', '6', '.', '.', '.', '3' },
+                { '4', '.', '.', '8', '.', '3', '.', '.', '1' },
+                { '7', '.', '.', '.', '2', '.', '.', '.', '6' },
+                { '.', '6', '.', '.', '.', '.', '2', '8', '.' },
+                { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
+                { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
+        };
+        boolean result = isValidSudoku(board);
 
-        for (List<Integer> list : result) {
-            for (Integer list2 : list) {
-                System.out.print(list2);
+        System.out.println(result);
+    }
+
+    public static boolean isValidSudoku(char[][] board) {
+        for (int i = 0; i < board.length; i++) {
+            for (int j = 0; j < board.length; j++) {
+                if (board[i][j] == '.') {
+                    continue;
+                }
+
+                if (!isValidSudoku(board, i, j, board[i][j])) {
+                    // System.out.println(String.format("board[%s][%s]=%s", i, j, board[i][j]));
+                    return false;
+                }
             }
-            System.out.println();
         }
+
+        return true;
     }
 
-    public static List<List<Integer>> permute(int[] nums) {
-        List<List<Integer>> result = new ArrayList<>();
-        LinkedList<Integer> track = new LinkedList<>();
+    public static boolean isValidSudoku(char[][] board, int row, int col, char c) {
+        for (int i = 0; i < board.length; i++) {
+            if (i != col && c == board[row][i]) {
+                return false;
+            }
 
-        if (nums.length <= 0)
-            return result;
+            if (i != row && c == board[i][col]) {
+                return false;
+            }
 
-        backTrack(nums, track, result);
-        return result;
-    }
+            int rowIdxBoard = (row / 3) * 3 + i / 3;
+            int colIdxBoard = (col / 3) * 3 + i % 3;
 
-    private static void backTrack(int[] nums, LinkedList<Integer> track, List<List<Integer>> result) {
-        if (nums.length == track.size()) {
-            result.add(new ArrayList<>(track));
-            return;
+            // System.out.println(String.format("rowIdxBoard=%s; colIdxBoard=%s",
+            // rowIdxBoard, colIdxBoard));
+
+            if (rowIdxBoard != row && colIdxBoard != col && c == board[rowIdxBoard][colIdxBoard]) {
+                return false;
+            }
         }
 
-        for (int i = 0; i < nums.length; i++) {
-            if (track.contains(nums[i]))
-                continue;
+        // System.out.println();
 
-            track.push(nums[i]);
-            backTrack(nums, track, result);
-            track.pollFirst();
-        }
+        return true;
     }
 }
