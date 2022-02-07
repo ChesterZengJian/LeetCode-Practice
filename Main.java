@@ -11,7 +11,7 @@ public class Main {
 
     public static void main(String[] args) {
         int[] nums = new int[] { 1, 2, 3 };
-        List<List<Integer>> result = combine(4, 2);
+        List<List<Integer>> result = permute(nums);
 
         for (List<Integer> list : result) {
             for (Integer list2 : list) {
@@ -21,26 +21,29 @@ public class Main {
         }
     }
 
-    public static List<List<Integer>> combine(int n, int k) {
+    public static List<List<Integer>> permute(int[] nums) {
         List<List<Integer>> result = new ArrayList<>();
         LinkedList<Integer> track = new LinkedList<>();
 
-        if (k <= 0 || n <= 0)
+        if (nums.length <= 0)
             return result;
 
-        backTrack(1, n, k, track, result);
+        backTrack(nums, track, result);
         return result;
     }
 
-    private static void backTrack(int startIdx, int n, int k, LinkedList<Integer> track,
-            List<List<Integer>> result) {
-        if (k == track.size()) {
+    private static void backTrack(int[] nums, LinkedList<Integer> track, List<List<Integer>> result) {
+        if (nums.length == track.size()) {
             result.add(new ArrayList<>(track));
+            return;
         }
 
-        for (int i = startIdx; i <= n; i++) {
-            track.push(i);
-            backTrack(i + 1, n, k, track, result);
+        for (int i = 0; i <= nums.length; i++) {
+            if (track.contains(nums[i]))
+                continue;
+
+            track.push(nums[i]);
+            backTrack(nums, track, result);
             track.pollFirst();
         }
     }
