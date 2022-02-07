@@ -19,74 +19,41 @@ public class Main {
                 { '.', '.', '.', '4', '1', '9', '.', '.', '5' },
                 { '.', '.', '.', '.', '8', '.', '.', '7', '9' }
         };
-        solveSudoku(board);
 
-        for (char[] cs : board) {
-            for (char c : cs) {
-                System.out.print(c + " | ");
-            }
-            System.out.println();
+        List<String> resutl = generateParenthesis(3);
+
+        for (String res : resutl) {
+            System.out.println(res);
         }
     }
 
-    public static void solveSudoku(char[][] board) {
-        backTrack(board, 0, 0);
+    public static List<String> generateParenthesis(int n) {
+        List<String> result = new ArrayList<>();
+        backTrack(n, n, new StringBuilder(), result);
+        return result;
     }
 
-    private static boolean backTrack(char[][] board, int row, int col) {
-        if (col >= board.length) {
-            return backTrack(board, row + 1, 0);
+    private static void backTrack(int left, int right, StringBuilder track, List<String> result) {
+        if (left < 0 || right < 0) {
+            return;
         }
 
-        if (row >= board.length) {
-            return true;
+        if (left > right) {
+            return;
         }
 
-        if (board[row][col] != '.') {
-            return backTrack(board, row, col + 1);
+        if (left == 0 && right == 0) {
+            result.add(track.toString());
+            return;
         }
 
-        for (char num = '1'; num <= '9'; num++) {
-            if (!isValidSudoku(board, row, col, num)) {
-                continue;
-            }
+        track.append("(");
+        backTrack(left - 1, right, track, result);
+        track.delete(track.length() - 1, track.length());
 
-            board[row][col] = num;
-            if (backTrack(board, row, col + 1)) {
-                return true;
-            }
-            board[row][col] = '.';
-        }
-
-        // if no suitable number, we return false and replace the last number to
-        // continue
-        return false;
-    }
-
-    public static boolean isValidSudoku(char[][] board, int row, int col, char c) {
-        for (int i = 0; i < board.length; i++) {
-            if (i != col && c == board[row][i]) {
-                return false;
-            }
-
-            if (i != row && c == board[i][col]) {
-                return false;
-            }
-
-            int rowIdxBoard = (row / 3) * 3 + i / 3;
-            int colIdxBoard = (col / 3) * 3 + i % 3;
-
-            // System.out.println(String.format("rowIdxBoard=%s; colIdxBoard=%s",
-            // rowIdxBoard, colIdxBoard));
-
-            if (rowIdxBoard != row && colIdxBoard != col && c == board[rowIdxBoard][colIdxBoard]) {
-                return false;
-            }
-        }
-
-        // System.out.println();
-
-        return true;
+        track.append(")");
+        backTrack(left, right - 1, track, result);
+        track.delete(track.length() - 1, track.length());
     }
 
 }
