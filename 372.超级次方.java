@@ -1,22 +1,17 @@
 import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
 import java.util.List;
-import java.util.Map.Entry;
 
-public class Main {
+/*
+ * @lc app=leetcode.cn id=372 lang=java
+ *
+ * [372] 超级次方
+ */
 
-    private static int base = 1337;
+// @lc code=start
+class Solution {
+    private int base = 1337;
 
-    public static void main(String[] args) {
-        System.out.println(superPow(2, new int[] { 1, 0 }));
-    }
-
-    public static int superPow(int a, int[] b) {
+    public int superPow(int a, int[] b) {
         List<Integer> indexs = new ArrayList<>(b.length);
 
         for (int i = 0; i < b.length; i++) {
@@ -26,7 +21,7 @@ public class Main {
         return superPow(a, indexs);
     }
 
-    public static int superPow(int a, List<Integer> indexs) {
+    public int superPow(int a, List<Integer> indexs) {
         if (indexs.isEmpty())
             return 1;
         int last = indexs.remove(indexs.size() - 1);
@@ -36,12 +31,10 @@ public class Main {
         return (part1 * part2) % base;
     }
 
-    public static int myPow(int a, int b) {
+    public int myPow(int a, int b) {
         if (b == 0) {
             return 1;
         }
-
-        // a 作为乘数，也需要取模
 
         a %= base;
         if (b % 2 == 1) {
@@ -52,3 +45,4 @@ public class Main {
         return (res * res) % base;
     }
 }
+// @lc code=end
