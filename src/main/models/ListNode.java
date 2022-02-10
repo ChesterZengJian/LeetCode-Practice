@@ -1,4 +1,4 @@
-package models;
+package src.main.com.chester.models;
 
 public class ListNode {
     public int val;

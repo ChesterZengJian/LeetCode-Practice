@@ -1,4 +1,4 @@
-package models;
+package src.main.com.chester.models;
 
 import java.util.LinkedList;
 

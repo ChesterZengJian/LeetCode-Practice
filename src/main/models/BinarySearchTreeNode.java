@@ -1,4 +1,4 @@
-package models;
+package src.main.com.chester.models;
 
 public class BinarySearchTreeNode {
     public int val;
