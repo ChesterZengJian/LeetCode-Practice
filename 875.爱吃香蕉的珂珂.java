@@ -1,27 +1,12 @@
-package main;
+/*
+ * @lc app=leetcode.cn id=875 lang=java
+ *
+ * [875] 爱吃香蕉的珂珂
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.HashMap;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map.Entry;
-
-public class Main {
-
-    private static int base = 1337;
-
-    public static void main(String[] args) {
-        int[] nums = { 3, 6, 7, 11 };
-        int target = 8;
-        int res = minEatingSpeed(nums, target);
-        System.out.println(res);
-    }
-
-    public static int minEatingSpeed(int[] piles, int h) {
+// @lc code=start
+class Solution {
+    public int minEatingSpeed(int[] piles, int h) {
         int left = 1;
         int right = getMaxPile(piles) + 1;
 
@@ -37,7 +22,7 @@ public class Main {
         return left;
     }
 
-    private static boolean canEatFinish(int k, int[] piles, int h) {
+    private boolean canEatFinish(int k, int[] piles, int h) {
         long totalHour = 0;
 
         for (int i = 0; i < piles.length; i++) {
@@ -51,7 +36,7 @@ public class Main {
         return false;
     }
 
-    private static int getMaxPile(int[] piles) {
+    private int getMaxPile(int[] piles) {
         int res = 0;
 
         for (int i = 0; i < piles.length; i++) {
@@ -61,3 +46,4 @@ public class Main {
         return res;
     }
 }
+// @lc code=end
