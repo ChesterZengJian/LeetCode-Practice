@@ -16,23 +16,19 @@ import java.util.Map.Entry;
 public class Main {
 
     public static void main(String[] args) {
-        int[] nums = { 1, 1, 2 };
-        int res = removeDuplicates(nums);
+        int[] nums = { 3, 2, 1, 0, 4 };
+        boolean res = canJump(nums);
         System.out.println(res);
     }
 
-    public static int removeDuplicates(int[] nums) {
-        int slow = 0, fast = 1;
-
-        while (fast < nums.length) {
-            if (nums[slow] != nums[fast]) {
-                slow++;
-                nums[slow] = nums[fast];
-            }
-
-            fast++;
+    public static boolean canJump(int[] nums) {
+        int fastest = 0;
+        for (int i = 0; i < nums.length - 1; i++) {
+            fastest = Math.max(fastest, i + nums[i]);
+            System.out.println(String.format("i=%s;fastest=%s;nums[%s]=%s", i, fastest, i, nums[i]));
+            if (fastest <= i)
+                return false;
         }
-
-        return slow + 1;
+        return true;
     }
 }
