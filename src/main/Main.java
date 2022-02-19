@@ -7,12 +7,16 @@ import java.util.Collections;
 import java.util.Comparator;
 import java.util.Set;
 
+import main.models.UnionFind;
+
 public class Main {
 
     public static void main(String[] args) {
-        int[][] nums = { { -2147483646, -2147483645 }, { 2147483646, 2147483647 } };
-        int actual = findMinArrowShots(nums);
-        System.out.println(actual);
+        UnionFind unionFind = new UnionFind(10);
+        unionFind.union(0, 1);
+        unionFind.union(2, 1);
+        System.out.println(unionFind.connect(0, 2));
+        System.out.println(unionFind.connect(0, 4));
     }
 
     public static int findMinArrowShots(int[][] points) {
