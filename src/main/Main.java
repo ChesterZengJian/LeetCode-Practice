@@ -12,33 +12,26 @@ import main.models.UnionFind;
 public class Main {
 
     public static void main(String[] args) {
-        UnionFind unionFind = new UnionFind(10);
-        unionFind.union(0, 1);
-        unionFind.union(2, 1);
-        System.out.println(unionFind.connect(0, 2));
-        System.out.println(unionFind.connect(0, 4));
+        String[] equations = new String[] { "a==b", "b!=a" };
+        boolean actual = equationsPossible(equations);
+        System.out.println(actual);
     }
 
-    public static int findMinArrowShots(int[][] points) {
-        if (points.length <= 1) {
-            return points.length;
-        }
+    public static boolean equationsPossible(String[] equations) {
+        UnionFind unionFind = new UnionFind(26);
 
-        Arrays.sort(points, new Comparator<int[]>() {
-            public int compare(int[] a, int[] b) {
-                return (a[1] < b[1]) ? -1 : ((a[1] == b[1]) ? 0 : 1);
-            }
-        });
-
-        int count = 1;
-        int end = points[0][1];
-        for (int i = 1; i < points.length; i++) {
-            if (points[i][0] > end) {
-                count++;
-                end = points[i][1];
+        for (String equation : equations) {
+            if (equation.charAt(1) == '=') {
+                unionFind.union(equation.charAt(0) - 'a', equation.charAt(3) - 'a');
             }
         }
 
-        return count;
+        for (String equation : equations) {
+            if (equation.charAt(1) == '!' && unionFind.connect(equation.charAt(0) - 'a', equation.charAt(3) - 'a')) {
+                return false;
+            }
+        }
+
+        return true;
     }
 }
