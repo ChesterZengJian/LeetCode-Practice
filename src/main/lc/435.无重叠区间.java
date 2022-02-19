@@ -1,32 +1,19 @@
-package main;
-
-import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
 import java.util.Comparator;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.LinkedHashMap;
-import java.util.LinkedList;
-import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.Map.Entry;
 
-public class Main {
+/*
+ * @lc app=leetcode.cn id=435 lang=java
+ *
+ * [435] 无重叠区间
+ */
 
-    public static void main(String[] args) {
-        int[][] nums = { { 1, 2 }, { 2, 3 }, { 3, 4 }, { 1, 3 } };
-        int actual = eraseOverlapIntervals(nums);
-        System.out.println(actual);
-    }
-
-    public static int eraseOverlapIntervals(int[][] intervals) {
+// @lc code=start
+class Solution {
+    public int eraseOverlapIntervals(int[][] intervals) {
         return intervals.length - getOverlapIntervalTotal(intervals);
     }
 
-    private static int getOverlapIntervalTotal(int[][] intervals) {
+    private int getOverlapIntervalTotal(int[][] intervals) {
         if (intervals.length <= 1) {
             return intervals.length;
         }
@@ -53,3 +40,4 @@ public class Main {
         return interval;
     }
 }
+// @lc code=end
