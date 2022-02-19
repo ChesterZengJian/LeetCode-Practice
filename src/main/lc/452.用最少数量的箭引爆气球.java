@@ -1,27 +1,19 @@
-package main;
+/*
+ * @lc app=leetcode.cn id=452 lang=java
+ *
+ * [452] 用最少数量的箭引爆气球
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Set;
-
-public class Main {
-
-    public static void main(String[] args) {
-        int[][] nums = { { -2147483646, -2147483645 }, { 2147483646, 2147483647 } };
-        int actual = findMinArrowShots(nums);
-        System.out.println(actual);
-    }
-
-    public static int findMinArrowShots(int[][] points) {
+// @lc code=start
+class Solution {
+    public int findMinArrowShots(int[][] points) {
         if (points.length <= 1) {
             return points.length;
         }
 
         Arrays.sort(points, new Comparator<int[]>() {
             public int compare(int[] a, int[] b) {
+                // 两数太大且一正一负时计算超范围
                 return (a[1] < b[1]) ? -1 : ((a[1] == b[1]) ? 0 : 1);
             }
         });
@@ -38,3 +30,4 @@ public class Main {
         return count;
     }
 }
+// @lc code=end
