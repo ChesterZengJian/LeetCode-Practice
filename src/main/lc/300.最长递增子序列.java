@@ -1,23 +1,13 @@
-package main;
+package main.lc;
+/*
+ * @lc app=leetcode.cn id=300 lang=java
+ *
+ * [300] 最长递增子序列
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Set;
-
-import main.models.UnionFind;
-
-public class Main {
-
-    public static void main(String[] args) {
-        int[] nums = new int[] { 10, 9, 2, 5, 3, 7, 101, 18 };
-        int actual = lengthOfLIS(nums);
-        System.out.println(actual);
-    }
-
-    public static int lengthOfLIS(int[] nums) {
+// @lc code=start
+class Solution {
+    public int lengthOfLIS(int[] nums) {
         // dp[i] 为每个数的最长子序列
         int[] dp = new int[nums.length];
         Arrays.fill(dp, 1);
@@ -42,3 +32,5 @@ public class Main {
         return res;
     }
 }
+// @lc code=end
+
