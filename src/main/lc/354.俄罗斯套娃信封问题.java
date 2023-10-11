@@ -1,27 +1,15 @@
-package main;
+/*
+ * @lc app=leetcode.cn id=354 lang=java
+ *
+ * [354] 俄罗斯套娃信封问题
+ */
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.Set;
-
-import javax.lang.model.element.Element;
-
-import org.junit.experimental.max.MaxCore;
-
-import main.models.UnionFind;
-
-public class Main {
-
-    public static void main(String[] args) {
-        int[][] nums = new int[][] { { 5, 4 }, { 6, 4 }, { 6, 7 }, { 2, 3 } };
-        int actual = maxEnvelopes(nums);
-        System.out.println(actual);
-    }
-
-    public static int maxEnvelopes(int[][] envelopes) {
+// @lc code=start
+class Solution {
+    /**
+     * Error: timeout
+     */
+    public int maxEnvelopes(int[][] envelopes) {
         // 将宽升序排好，相同的宽则将高倒叙
         Arrays.sort(envelopes, new Comparator<int[]>() {
             public int compare(int[] a, int[] b) {
@@ -38,10 +26,12 @@ public class Main {
             heights[i] = envelopes[i][1];
         }
 
-        return lengthOfLIS(heights);
+        int res = lengthOfLIS(heights);
+        System.out.println(res);
+        return res;
     }
 
-    public static int lengthOfLIS(int[] nums) {
+    public int lengthOfLIS(int[] nums) {
         // 初始化没有牌堆
         int piles = 0;
         // 每个牌堆顶部为每个子序列的最大值，最多有 nums.length 个牌堆
@@ -71,3 +61,4 @@ public class Main {
         return piles;
     }
 }
+// @lc code=end
