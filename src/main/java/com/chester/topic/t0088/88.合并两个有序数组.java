@@ -1,3 +1,5 @@
+package main.java.com.chester.topic.t0088;
+
 /*
  * @lc app=leetcode.cn id=88 lang=java
  *
