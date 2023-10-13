@@ -1,7 +1,9 @@
+package main.java.com.chester.topic.t0239;
+
 import java.util.ArrayList;
 import java.util.List;
 
-import models.MonotonicQueue;
+import main.java.com.chester.models.MonotonicQueue;
 
 /*
  * @lc app=leetcode.cn id=239 lang=java
@@ -38,32 +40,32 @@ class Solution {
 }
 
 // public class MonotonicQueue {
-//     private LinkedList<Integer> queue = new LinkedList<>();
+// private LinkedList<Integer> queue = new LinkedList<>();
 
-//     public void push(int num) {
-//         while (!queue.isEmpty() && queue.peekLast() < num) {
-//             queue.pollLast();
-//         }
+// public void push(int num) {
+// while (!queue.isEmpty() && queue.peekLast() < num) {
+// queue.pollLast();
+// }
 
-//         queue.addLast(num);
-//     }
+// queue.addLast(num);
+// }
 
-//     public int pop(int num) {
-//         if (!queue.isEmpty() && queue.peekFirst() == num) {
-//             return queue.pop();
-//         }
+// public int pop(int num) {
+// if (!queue.isEmpty() && queue.peekFirst() == num) {
+// return queue.pop();
+// }
 
-//         return num;
-//     }
+// return num;
+// }
 
-//     public int getMax() {
-//         return queue.peekFirst();
-//     }
+// public int getMax() {
+// return queue.peekFirst();
+// }
 
-//     public void print() {
-//         while (!queue.isEmpty()) {
-//             System.out.println(queue.pop());
-//         }
-//     }
+// public void print() {
+// while (!queue.isEmpty()) {
+// System.out.println(queue.pop());
+// }
+// }
 // }
 // @lc code=end

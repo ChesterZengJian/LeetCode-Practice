@@ -1,12 +1,12 @@
+package main.java.com.chester.topic.t0001;
+
+import java.util.HashMap;
+
 /*
  * @lc app=leetcode.cn id=1 lang=java
  *
  * [1] 两数之和
  */
-
-package main.java.com.chester.topic.t0001;
-
-import java.util.HashMap;
 
 // @lc code=start
 class Solution {

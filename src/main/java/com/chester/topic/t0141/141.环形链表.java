@@ -1,4 +1,6 @@
-import models.ListNode;
+package main.java.com.chester.topic.t0141;
+
+import main.java.com.chester.models.ListNode;
 
 /*
  * @lc app=leetcode.cn id=141 lang=java
@@ -18,7 +20,7 @@ import models.ListNode;
  * }
  * }
  */
-public class Solution {
+class Solution {
     public boolean hasCycle(ListNode head) {
         if (head == null) {
             return false;

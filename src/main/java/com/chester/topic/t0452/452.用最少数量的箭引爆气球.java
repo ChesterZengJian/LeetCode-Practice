@@ -1,3 +1,8 @@
+package main.java.com.chester.topic.t0452;
+
+import java.util.Arrays;
+import java.util.Comparator;
+
 /*
  * @lc app=leetcode.cn id=452 lang=java
  *

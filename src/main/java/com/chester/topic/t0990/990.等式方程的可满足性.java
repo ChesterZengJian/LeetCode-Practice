@@ -1,3 +1,5 @@
+package main.java.com.chester.topic.t0990;
+
 /*
  * @lc app=leetcode.cn id=990 lang=java
  *
@@ -25,7 +27,7 @@ class Solution {
     }
 }
 
-public class UnionFind {
+class UnionFind {
     private int count;
     private int[] parent;
     private int[] size;

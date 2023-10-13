@@ -1,3 +1,7 @@
+package main.java.com.chester.topic.t0092;
+
+import main.java.com.chester.models.ListNode;
+
 /*
  * @lc app=leetcode.cn id=92 lang=java
  *

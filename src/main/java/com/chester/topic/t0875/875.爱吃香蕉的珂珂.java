@@ -1,4 +1,4 @@
-package main.lc;
+package main.java.com.chester.topic.t0875;
 /*
  * @lc app=leetcode.cn id=875 lang=java
  *

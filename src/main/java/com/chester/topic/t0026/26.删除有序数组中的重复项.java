@@ -1,3 +1,5 @@
+package main.java.com.chester.topic.t0026;
+
 /*
  * @lc app=leetcode.cn id=26 lang=java
  *
@@ -22,4 +24,3 @@ class Solution {
     }
 }
 // @lc code=end
-

@@ -1,3 +1,7 @@
+package main.java.com.chester.topic.t0234;
+
+import main.java.com.chester.models.ListNode;
+
 /*
  * @lc app=leetcode.cn id=234 lang=java
  *
@@ -41,7 +45,7 @@ class Solution {
 
         return true;
     }
-    
+
     public static ListNode reverse(ListNode head) {
         ListNode pre = null, cur = head;
 
@@ -56,18 +60,18 @@ class Solution {
     }
 
     // public boolean isPalindrome(ListNode head) {
-    //     left = head;
-    //     return travser(head);
+    // left = head;
+    // return travser(head);
     // }
 
     // public boolean travser(ListNode right) {
-    //     if (right == null)
-    //         return true;
+    // if (right == null)
+    // return true;
 
-    //     boolean res = travser(right.next);
-    //     res = res && right.val == left.val;
-    //     left = left.next;
-    //     return res;
+    // boolean res = travser(right.next);
+    // res = res && right.val == left.val;
+    // left = left.next;
+    // return res;
     // }
 }
 // @lc code=end

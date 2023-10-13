@@ -1,22 +1,22 @@
-package test.java;
+package main.java.com.chester.topic.t0026;
 
 import org.junit.Assert;
 import org.junit.Test;
 
-import main.Main;
-
-public class RemoveDuplicatesTest {
+public class TestCase {
     @Test
     public void removeDuplicates2() {
         int[] nums = { 1, 1, 2 };
-        int res = Main.removeDuplicates(nums);
+        Solution solution = new Solution();
+        int res = solution.removeDuplicates(nums);
         Assert.assertEquals(2, res);
     }
 
     @Test
     public void removeDuplicates5() {
         int[] nums = { 0, 0, 1, 1, 1, 2, 2, 3, 3, 4 };
-        int res = Main.removeDuplicates(nums);
+        Solution solution = new Solution();
+        int res = solution.removeDuplicates(nums);
         Assert.assertEquals(5, res);
     }
 }

@@ -1,3 +1,7 @@
+package main.java.com.chester.topic.t0142;
+
+import main.java.com.chester.models.ListNode;
+
 /*
  * @lc app=leetcode.cn id=142 lang=java
  *
@@ -16,7 +20,7 @@
  * }
  * }
  */
-public class Solution {
+class Solution {
     public ListNode detectCycle(ListNode head) {
         ListNode slow, fast;
         slow = fast = head;
